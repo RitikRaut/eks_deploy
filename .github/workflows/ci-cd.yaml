@@ -3,7 +3,7 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main  # Adjust to your default branch if needed
+      - main  # Change to your default branch if needed
 
 jobs:
   build:
@@ -18,6 +18,8 @@ jobs:
 
       - name: Log in to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v1
+        with:
+          region: us-east-2  # Specify the AWS region here
 
       - name: Build and Push Backend Docker Image
         run: |
