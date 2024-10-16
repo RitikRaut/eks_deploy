@@ -3,7 +3,7 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main  # Change to your default branch if needed
+      - main  # Adjust to your default branch if needed
 
 jobs:
   build:
@@ -37,10 +37,8 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Update Kubeconfig
-        uses: aws-actions/eks-update-kubeconfig@v1
-        with:
-          cluster-name: ${{ secrets.CLUSTER_NAME }}
-          region: ${{ secrets.AWS_REGION }}
+        run: |
+          aws eks update-kubeconfig --name ${{ secrets.CLUSTER_NAME }} --region ${{ secrets.AWS_REGION }}
 
       - name: Deploy Backend to EKS
         run: |
